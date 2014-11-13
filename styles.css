@@ -1,0 +1,9 @@
+.tweets {
+
+	float: center;
+	background: red;
+	border-radius: 5px;
+	border: 1px;
+	padding: .3em;
+	margin:.1em;
+}

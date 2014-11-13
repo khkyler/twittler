@@ -3,22 +3,54 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <script src="underbar.js"></script>
+    <script src="application.js"></script>
+    <link rel ="stylesheet" type="text/css" href="styles.css">
   </head>
   <body>
     <script>
 
       $(document).ready(function(){
         var $body = $('body');
-        $body.html('');
-
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
+        $body.html('<button name="button">Click me</button>');
+        $('button').on('click', function(){
+          var index = streams.home.length - 1;
+          $('.tweets').remove();
+          while(index >= 0){
+            var tweet = streams.home[index];
+            var $tweet = $('<div class="tweets"></div>');
+            // var timeDiff = function(){
+            //   var time = Date.now() - tweet.created_at;
+            //   var seconds = Math.floor(time / 1000);
+            //   var mins = Math.floor(seconds / 60);
+            //    var hours = Math.floor(mins / 60);
+            //   var days = Math.floor(hours / 24);
+            //   if (days > 0){
+            //     return days + 'd' + hours + 'h'
+            //   }else if (hours > 0){
+            //     return hours + 'h'
+            //   }else if (mins > 0){
+            //     return mins + 'm'
+            //   } else {
+            //     return seconds + 's'
+            //   }
+            // }
+            $tweet.text(tweet.user + ' @' + tweet.user + ' * ' + timeDiff(tweet.created_at) + ' ago\n' + tweet.message);
+            $tweet.appendTo($body);
           index -= 1;
         }
+        $tweet.appendTo($body);
+        })
+        // var index = streams.home.length - 1;
+        // while(index >= 0){
+        //   var tweet = streams.home[index];
+        //   var $tweet = $('<div class="tweets"></div>');
+        //   if (!_.contains(streams.home, tweet.message)){
+        //     $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + tweet.created_at);
+        //     $tweet.appendTo($body);
+        //   }
+        //   index -= 1;
+        // }
 
       });
 
