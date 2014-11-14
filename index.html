@@ -26,7 +26,7 @@
           } 
         };
         listenUp();
-        //setInterval(listenUp,10000);
+        setInterval(listenUp,10000);
         $('.user').on('click', function(){
             var currentUser = $(this).data('user');
             var i = streams.users[currentUser].length - 1;
