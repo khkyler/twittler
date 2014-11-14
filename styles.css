@@ -1,26 +1,35 @@
 body {
 
-	background-image: url(https://abs.twimg.com/images/themes/theme1/bg.png);
+	background-image: url(img/bg.png);
 	background-attachment: fixed; 
 	background-repeat: no-repeat;
 	background-color: #C0DEED;
+}
+
+#sendTweet {
+	background: white;
+	max-width: 940px;
+	margin: 0 auto;
+	margin-bottom: 20px;
+	padding: 10px 0px 40px 0px;
 }
 
 #tweetSpace {
 	background: white;
 	max-width: 940px;
   	margin: 0 auto;
-  	padding: 1%;
+  	padding-top: 1%;
   	border-radius: 5px;
 }
 
 .tweets {
 	max-width: 100%;
 	background: white;
-	
-	border: 1px;
-	padding: none;
-	margin: none;
+	padding: 1%;
+	border-bottom: 1px solid #f5f8fa;
+}
+.tweets:hover{
+	background: #f5f8fa;
 }
 .tweets li {
 	text-decoration: none;

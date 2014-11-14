@@ -8,36 +8,38 @@
   </head>
   <body>
     <script>
-
       $(document).ready(function(){
         var $body = $('body');
-        $body.html('<div id="tweetSpace"></div>');
+        $body.html('<div id="sendTweet"><input type="text" max ="140"></input><button>Tweet</button></div><div id="tweetSpace"></div>');
         var $tweetHome = $('#tweetSpace');
         var listenUp = function(){
           var index = streams.home.length - 1;
           $('.tweets').remove();
           while(index >= 0){
             var tweet = streams.home[index];
-            var $tweet = $($.parseHTML('<div class="tweets"><ul><li class="user" data-user='+ '"'+ tweet.user + '"'+'>' +tweet.user + '</li><li class="username">@' + tweet.user + ' ' + ' </li><li class ="time"> ' + timeDiff(tweet.created_at) + ' ago </li><li class="message">' + tweet.message+ '</li></ul></div>'));
-            $('.tweets').data('user',tweet.user);
-            $($tweet).appendTo($tweetHome);
-
+            var $tweet = $('<div class="tweets"><ul><li class="user" data-user=' + '"'+ tweet.user + '"'+'>' +tweet.user + '</li><li class="username">@' + tweet.user + ' ' + ' </li><li class ="time"> ' + timeDiff(tweet.created_at) + ' ago </li><li class="message">' + tweet.message+ '</li></ul></div>');
+            //$().data('user',tweet.user);
+            $tweet.appendTo($tweetHome);
+            $tweet.on('click', function(){
+              var currentUser = $(this).find('.user').data('user');
+              var i = streams.users[currentUser].length - 1;
+              $('.tweets').remove();
+              while (i >= 0){
+                  var tweet = streams.users[currentUser][i];
+                  var $tweet = $('<div class="tweets"><ul><li class="user">' +tweet.user + '</li><li class="username">@' + tweet.user + ' ' + ' </li><li class ="time"> ' + timeDiff(tweet.created_at) + ' ago </li><li class="message">' + tweet.message+ '</li></ul></div>');
+                  $tweet.appendTo($tweetHome);
+                  
+                  i -= 1; 
+                }
+              })
             index -= 1;
           } 
         };
         listenUp();
-        setInterval(listenUp,10000);
-        $('.user').on('click', function(){
-            var currentUser = $(this).data('user');
-            var i = streams.users[currentUser].length - 1;
-            $('.tweets').remove();
-            while (i >= 0){
-              var tweet = streams.users[currentUser][i];
-              var $tweet = $($.parseHTML('<div class="tweets"><ul><li class="user">' +tweet.user + '</li><li class="username">@' + tweet.user + ' ' + ' </li><li class ="time"> ' + timeDiff(tweet.created_at) + ' ago </li><li class="message">' + tweet.message+ '</li></ul></div>'));
-              $($tweet).appendTo($tweetHome);
-              i -= 1; 
-            }
-          })
+      
+        
+        
+        //setInterval(listenUp,10000);
       });
 
     </script>
