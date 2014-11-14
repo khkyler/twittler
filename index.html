@@ -3,7 +3,6 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
-    <script src="underbar.js"></script>
     <script src="application.js"></script>
     <link rel ="stylesheet" type="text/css" href="styles.css">
   </head>
@@ -12,46 +11,33 @@
 
       $(document).ready(function(){
         var $body = $('body');
-        $body.html('<button name="button">Click me</button>');
-        $('button').on('click', function(){
+        $body.html('<div id="tweetSpace"></div>');
+        var $tweetHome = $('#tweetSpace');
+        var listenUp = function(){
           var index = streams.home.length - 1;
           $('.tweets').remove();
           while(index >= 0){
             var tweet = streams.home[index];
-            var $tweet = $('<div class="tweets"></div>');
-            // var timeDiff = function(){
-            //   var time = Date.now() - tweet.created_at;
-            //   var seconds = Math.floor(time / 1000);
-            //   var mins = Math.floor(seconds / 60);
-            //    var hours = Math.floor(mins / 60);
-            //   var days = Math.floor(hours / 24);
-            //   if (days > 0){
-            //     return days + 'd' + hours + 'h'
-            //   }else if (hours > 0){
-            //     return hours + 'h'
-            //   }else if (mins > 0){
-            //     return mins + 'm'
-            //   } else {
-            //     return seconds + 's'
-            //   }
-            // }
-            $tweet.text(tweet.user + ' @' + tweet.user + ' * ' + timeDiff(tweet.created_at) + ' ago\n' + tweet.message);
-            $tweet.appendTo($body);
-          index -= 1;
-        }
-        $tweet.appendTo($body);
-        })
-        // var index = streams.home.length - 1;
-        // while(index >= 0){
-        //   var tweet = streams.home[index];
-        //   var $tweet = $('<div class="tweets"></div>');
-        //   if (!_.contains(streams.home, tweet.message)){
-        //     $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + tweet.created_at);
-        //     $tweet.appendTo($body);
-        //   }
-        //   index -= 1;
-        // }
+            var $tweet = $($.parseHTML('<div class="tweets"><ul><li class="user" data-user='+ '"'+ tweet.user + '"'+'>' +tweet.user + '</li><li class="username">@' + tweet.user + ' ' + ' </li><li class ="time"> ' + timeDiff(tweet.created_at) + ' ago </li><li class="message">' + tweet.message+ '</li></ul></div>'));
+            $('.tweets').data('user',tweet.user);
+            $($tweet).appendTo($tweetHome);
 
+            index -= 1;
+          } 
+        };
+        listenUp();
+        //setInterval(listenUp,10000);
+        $('.user').on('click', function(){
+            var currentUser = $(this).data('user');
+            var i = streams.users[currentUser].length - 1;
+            $('.tweets').remove();
+            while (i >= 0){
+              var tweet = streams.users[currentUser][i];
+              var $tweet = $($.parseHTML('<div class="tweets"><ul><li class="user">' +tweet.user + '</li><li class="username">@' + tweet.user + ' ' + ' </li><li class ="time"> ' + timeDiff(tweet.created_at) + ' ago </li><li class="message">' + tweet.message+ '</li></ul></div>'));
+              $($tweet).appendTo($tweetHome);
+              i -= 1; 
+            }
+          })
       });
 
     </script>

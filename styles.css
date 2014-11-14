@@ -1,9 +1,53 @@
-.tweets {
+body {
 
-	float: center;
-	background: red;
-	border-radius: 5px;
+	background-image: url(https://abs.twimg.com/images/themes/theme1/bg.png);
+	background-attachment: fixed; 
+	background-repeat: no-repeat;
+	background-color: #C0DEED;
+}
+
+#tweetSpace {
+	background: white;
+	max-width: 940px;
+  	margin: 0 auto;
+  	padding: 1%;
+  	border-radius: 5px;
+}
+
+.tweets {
+	max-width: 100%;
+	background: white;
+	
 	border: 1px;
-	padding: .3em;
-	margin:.1em;
+	padding: none;
+	margin: none;
+}
+.tweets li {
+	text-decoration: none;
+	list-style: none;
+}
+.tweets .username {
+	display: inline-block;
+	padding-right: 5px;
+	font-size: 13px;
+	color: #8899a6;
+}
+.tweets .user {
+	padding-right: 5px;
+	display: inline-block;
+	font-weight: bold;
+	color: #292f33;
+}
+.tweets .time{
+	display: inline-block;
+	font-size: 13px;
+	color: #8899a6;
+}
+.tweets .time:before {
+	content: "\00b7";
+}
+.tweets .message {
+	color: #292f33;
+	font-size: 14px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
