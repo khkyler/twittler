@@ -10,7 +10,6 @@ body {
 	background: white;
 	max-width: 940px;
 	margin: 0 auto;
-	margin-bottom: 20px;
 	padding: 10px 0px 40px 0px;
 }
 
@@ -53,6 +52,7 @@ body {
 	color: #8899a6;
 }
 .tweets .time:before {
+	padding-right: 3px;
 	content: "\00b7";
 }
 .tweets .message {

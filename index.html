@@ -17,11 +17,16 @@
           $('.tweets').remove();
           while(index >= 0){
             var tweet = streams.home[index];
-            var $tweet = $('<div class="tweets"><ul><li class="user" data-user=' + '"'+ tweet.user + '"'+'>' +tweet.user + '</li><li class="username">@' + tweet.user + ' ' + ' </li><li class ="time"> ' + timeDiff(tweet.created_at) + ' ago </li><li class="message">' + tweet.message+ '</li></ul></div>');
-            //$().data('user',tweet.user);
+            var $tweet = $('<div class="tweets"><ul><li class="user"></li><li class="username"><li class="time"></li></li><li class="message"></li></ul></div>');
+            $tweet.find('.user').text(tweet.user);
+            $tweet.find('.username').text('@' + tweet.user);
+            $tweet.find('.time').text(timeDiff(tweet.created_at));
+            $tweet.find('.message').text(tweet.message);
+            $tweet.attr('data-user',tweet.user);
             $tweet.appendTo($tweetHome);
             $tweet.on('click', function(){
-              var currentUser = $(this).find('.user').data('user');
+              userClick();
+              var currentUser = $(this).data('user');
               var i = streams.users[currentUser].length - 1;
               $('.tweets').remove();
               while (i >= 0){
@@ -39,7 +44,7 @@
       
         
         
-        //setInterval(listenUp,10000);
+        setInterval(listenUp,10000);
       });
 
     </script>
