@@ -14,3 +14,6 @@ var timeDiff = function(tweetTime){
                 return seconds + 's'
               }
             };
+var userClick = function(){
+  alert('I work!!');
+}
